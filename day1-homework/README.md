@@ -45,4 +45,22 @@ Considering  T
 ```
  - I'm not sure whether these make sense... A and G are most associated with each other, and C and T are most associated with each other. THis makes sense because chemically, A and G are purines and C and T are pyrimidines.
 
+## Exercise 2
+- All code is in `exercise2.sh`:
+```
+
+```
+- Deciding which states to consider as promoter-adjacent was not straight-forward. We learned that TSS means transcription start site, so I chose states 1 and 2 as my promoter-like regions.
+- We wanted to keep info from the vcf file so used that as `-a` in `bedtools intersect`. In order to get just states 1 and 2, we used awk on the bed file to get just the lines with states 1 and 2.
+Output:
+```
+  12 A
+  11 G
+  39 T
+```
+So T is the most common alternate allele.
+The most common alternate allele is still T, just like in the entire random snippet, but A and G are more equal here, whereas G was less common an allele in the entire snippet data. That could be significant and could be further probed.
+
+## Exercise 3
+
 
