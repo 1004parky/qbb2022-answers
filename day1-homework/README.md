@@ -48,6 +48,12 @@ Considering  T
 ## Exercise 2
 - All code is in `exercise2.sh`:
 ```
+vcf=~/data/vcf_files/random_snippet.vcf
+bed=~/data/bed_files/chromHMM.E116_15_coreMarks_hg38lift_stateno.chr21.bed
+
+awk '{if($4==1||$4==2){print}}' $bed > states12.bed 
+
+bedtools intersect -a $vcf -b "states12.bed" | awk '{if ($4 == "C") {print $5}}' | sort | uniq -c
 
 ```
 - Deciding which states to consider as promoter-adjacent was not straight-forward. We learned that TSS means transcription start site, so I chose states 1 and 2 as my promoter-like regions.
