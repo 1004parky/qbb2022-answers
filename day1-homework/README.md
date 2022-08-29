@@ -62,5 +62,18 @@ So T is the most common alternate allele.
 The most common alternate allele is still T, just like in the entire random snippet, but A and G are more equal here, whereas G was less common an allele in the entire snippet data. That could be significant and could be further probed.
 
 ## Exercise 3
+- I think this file is printing the the first column, second column value (minus 1), and second column value of the `input_VCF` file and writing all of this out to `variants.bed`. Then, we sort based on the first column alphanumerically and the 2nd column numerically for the `genes.bed` file and write that to another file. Then we find the genes in `genes.sorted.bed` that are closest to the genes listed in `variants.bed` using the bedtools closest tool.
+- Error 1:
+```
+Error: unable to open file or unable to determine types for file variants.bed
+```
+I googled around and found that there was some issue with the tabs, so I'm going to edit the awk line to replace commas with tabs (`\t`). For this I used the output field separator awk function I found on stack overflow. 
+- Error 2:
+```
+Error: Sorted input specified, but the file variants.bed has the following out of order record
+chr21	5218156	5218157
+```
+This means the sorting did not go as intended. Or rather, the variants file is not sorted. So I added the sort lines to the end of the initial awk line to get a sorted variants file!
 
+- To get the number of variants I used `wc -l e3.out` and I got 10293... We know gene names are in the last column so to get the number of unique genes: `sort -k 7 e3.out | cut -f 7 | uniq -c | wc -l` to get 200 unique genes. So on average there are 10293 divided by 200 so around 51.5 variants per gene.
 
