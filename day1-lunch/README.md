@@ -39,8 +39,20 @@
 
 	We used cut to just clean up the output a little bit.
 
-	c. For each state, we would want to look at the cumulative lengths of the genes; we can get the gene lengths by subtracting the start position from the end position. Every gene belongs to a state, so then I would keep track of 15 total sums (one for each state), and add the length to the correct tracked number. The state with the largest total sum would be the state with the largest fraction of the genome. (You could use sort -n and tail -1 to find the largest in the list)
+	c. For each state, we would want to look at the cumulative lengths of the genes; we can get the gene lengths by subtracting the start position from the end position. Every gene belongs to a state, so then I would keep track of 15 total sums (one for each state), and add the length to the correct tracked number. The state with the largest total sum would be the state with the largest fraction of the genome. (You could use sort -n and tail -1 to find the largest in the list). We'd have to make sure to keep track of which column/number corresponds to which state; we could make "state" an additional column in the sums file.
 
-
- 
+4. b. 
+	```
+	grep "AFR" integrated_call_samples.panel | sort -k 2 | cut -f-3 | uniq -cf 1
+	```
+	```
+	 123 HG01880	ACB	AFR
+	 112 NA19625	ASW	AFR
+	 173 HG02922	ESN	AFR
+	 180 HG02462	GWD	AFR
+	 122 NA19017	LWK	AFR
+	 128 HG03052	MSL	AFR
+	 206 NA18484	YRI	AFR
+	```
+ 	c. You could change the grep keyword for each superpopulation. Or, you could try something like this (sort by population and super-population at the same time): `sort -k 2,3 integrated_call_samples.panel | cut -f -3 | uniq -cf 1`
 
