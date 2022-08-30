@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # Yein Christina Park
 # Updated 08/30/2022
 # Parse bed files, return lines as lists of fields
