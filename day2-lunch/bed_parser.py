@@ -54,7 +54,8 @@ def parse_bed(fname):
             raise Exception 
         else:
           # all other entries
-          fields[j] = field_types[j](fields[j])
+          if fields[j] != '.':
+            fields[j] = field_types[j](fields[j])
       bed.append(fields)
     except:
       n_malformed += 1
