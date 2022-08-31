@@ -27,5 +27,9 @@ Relationship matrix calculation complete.
 ```
 I wasn't really sure what options to specify so I had just run sort of blind. Looking at the results, which pulled the top 20 eigenvalues, if I had to rerun, I would probably run with just 2 principal components because they have eigenvalues an order of magnitude greater than the rest of the eigenvalues. 
 
+## Exercise 2
+For this part I actually had to conda install numpy which I've never had to do before? Idk if that was right that I didn't already have numpy loaded. Actually, I had to install openblas.
+
+I do notice very apparent patterns formed between the two PCs plotted. They aren't simply linear correlations or anything, but clear clusters or regions of linear correlation.
 
 
