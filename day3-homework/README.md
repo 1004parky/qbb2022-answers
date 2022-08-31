@@ -30,6 +30,8 @@ I wasn't really sure what options to specify so I had just run sort of blind. Lo
 ## Exercise 2
 For this part I actually had to conda install numpy which I've never had to do before? Idk if that was right that I didn't already have numpy loaded. Actually, I had to install openblas.
 
-I do notice very apparent patterns formed between the two PCs plotted. They aren't simply linear correlations or anything, but clear clusters or regions of linear correlation.
+I do notice very apparent patterns formed between the two PCs plotted. They aren't simply linear correlations or anything, but clear clusters or regions of linear correlation. 
+
+A linear correlation means that the gene contributes roughly equally to both components. Clusters nearer to the axes mean that that group of genes tend to contribute similarly to both components and suggest that that group could be adequately represented by just a few of the genes in the cluster.
 
 
