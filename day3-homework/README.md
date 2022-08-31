@@ -47,4 +47,6 @@ ImportError: dlopen(/Users/cmdb/miniconda3/lib/python3.9/site-packages/numpy/cor
   Referenced from: '/Users/cmdb/miniconda3/lib/python3.9/site-packages/numpy/core/_multiarray_umath.cpython-39-darwin.so'
   Reason: tried: '/Users/cmdb/miniconda3/lib/libopenblas.dylib' (no such file), '/Users/cmdb/miniconda3/lib/libopenblas.dylib' (no such file), '/Users/cmdb/miniconda3/lib/python3.9/site-packages/numpy/core/../../../../libopenblas.dylib' (no such file), '/Users/cmdb/miniconda3/lib/libopenblas.dylib' (no such file), '/Users/cmdb/miniconda3/lib/libopenblas.dylib' (no such file), '/Users/cmdb/miniconda3/lib/python3.9/site-packages/numpy/core/../../../../libopenblas.dylib' (no such file), '/Users/cmdb/miniconda3/lib/libopenblas.dylib' (no such file), '/Users/cmdb/miniconda3/bin/../lib/libopenblas.dylib' (no such file), '/Users/cmdb/miniconda3/lib/libopenblas.dylib' (no such file), '/Users/cmdb/miniconda3/bin/../lib/libopenblas.dylib' (no such file), '/usr/local/lib/libopenblas.dylib' (no such file), '/usr/lib/libopenblas.dylib' (no such file)
 ```
-The last part said they couldn't find any openblas things so that is why I chose to install openblas.
+The last part said they couldn't find any openblas things so that is why I chose to `conda install openblas`.
+
+To fix this other error, `Unable to revert mtime: /Library/Fonts`, I ran `conda install libmagic`
