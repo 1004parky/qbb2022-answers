@@ -34,4 +34,17 @@ I do notice very apparent patterns formed between the two PCs plotted. They aren
 
 A linear correlation means that the gene contributes roughly equally to both components. Clusters nearer to the axes mean that that group of genes tend to contribute similarly to both components and suggest that that group could be adequately represented by just a few of the genes in the cluster.
 
-
+(PS this was the error I got)
+```
+Traceback (most recent call last):
+  File "/Users/cmdb/miniconda3/lib/python3.9/site-packages/numpy/core/__init__.py", line 23, in <module>
+    from . import multiarray
+  File "/Users/cmdb/miniconda3/lib/python3.9/site-packages/numpy/core/multiarray.py", line 10, in <module>
+    from . import overrides
+  File "/Users/cmdb/miniconda3/lib/python3.9/site-packages/numpy/core/overrides.py", line 6, in <module>
+    from numpy.core._multiarray_umath import (
+ImportError: dlopen(/Users/cmdb/miniconda3/lib/python3.9/site-packages/numpy/core/_multiarray_umath.cpython-39-darwin.so, 0x0002): Library not loaded: '@rpath/libopenblas.dylib'
+  Referenced from: '/Users/cmdb/miniconda3/lib/python3.9/site-packages/numpy/core/_multiarray_umath.cpython-39-darwin.so'
+  Reason: tried: '/Users/cmdb/miniconda3/lib/libopenblas.dylib' (no such file), '/Users/cmdb/miniconda3/lib/libopenblas.dylib' (no such file), '/Users/cmdb/miniconda3/lib/python3.9/site-packages/numpy/core/../../../../libopenblas.dylib' (no such file), '/Users/cmdb/miniconda3/lib/libopenblas.dylib' (no such file), '/Users/cmdb/miniconda3/lib/libopenblas.dylib' (no such file), '/Users/cmdb/miniconda3/lib/python3.9/site-packages/numpy/core/../../../../libopenblas.dylib' (no such file), '/Users/cmdb/miniconda3/lib/libopenblas.dylib' (no such file), '/Users/cmdb/miniconda3/bin/../lib/libopenblas.dylib' (no such file), '/Users/cmdb/miniconda3/lib/libopenblas.dylib' (no such file), '/Users/cmdb/miniconda3/bin/../lib/libopenblas.dylib' (no such file), '/usr/local/lib/libopenblas.dylib' (no such file), '/usr/lib/libopenblas.dylib' (no such file)
+```
+The last part said they couldn't find any openblas things so that is why I chose to install openblas.
