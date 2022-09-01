@@ -64,21 +64,19 @@ def compute_power(n_rejected_correctly, n_tests):
     power = n_rejected_correctly / n_tests
     return(power)
 
-def run_experiment(n_iters = 100, seed = 389, correct_the_pvalues = False):
+def run_experiment(tosses, probs, n_iters = 100, seed = 389, correct_the_pvalues = False):
     '''
     Will run several coin toss experiments using combinations of P(head) and number of tosses
     as specified in the body of the function. 
 
-    Input: n_iters, an integer, the number of iterations for each simulation. default is 100
+    Input: tosses (list): list of tosses to iterate through
+           probs (list): list of probabilities
+           n_iters, an integer, the number of iterations for each simulation. default is 100
            seed, an integer, the random seed that you will set for the whole simulation experiment. default is 389
            correct_the_pvalues, a boolean, whether or not to perform multiple hypothesis testing correction
     Output: power, a float, the power of the experiment
     '''
     numpy.random.seed(seed)
-
-    # bunch of tosses and probs
-    tosses = numpy.array([10, 50, 100, 250, 500, 1000])
-    probs = numpy.around(numpy.arange(0.55, 1.05, 0.05), decimals=2)[::-1]
 
     powers = numpy.zeros((len(probs), len(tosses)))
     powers_corrected = numpy.zeros((len(probs), len(tosses)))
@@ -120,4 +118,8 @@ def run_experiment(n_iters = 100, seed = 389, correct_the_pvalues = False):
     fig.savefig('power_c.png')
     return powers, powers_corrected
 
-run_experiment()
+# bunch of tosses and probs
+tosses = numpy.array([10, 50, 100, 250, 500, 1000])
+probs = numpy.around(numpy.arange(0.55, 1.05, 0.05), decimals=2)[::-1]
+
+run_experiment(tosses, probs)
