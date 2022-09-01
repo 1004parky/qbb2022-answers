@@ -2,7 +2,7 @@
 # Edited by Yein Christina Park 9/1/2022
 
 import numpy
-from scipy.stats import binom_test
+from scipy.stats import binomtest
 import matplotlib.pyplot as plt
 import seaborn as sns
 from statsmodels.stats.multitest import multipletests
@@ -68,35 +68,41 @@ def run_experiment(n_iters = 100, seed = 389, correct_the_pvalues = False):
     '''
     Will run several coin toss experiments using combinations of P(head) and number of tosses
     as specified in the body of the function. 
-    
+
     Input: n_iters, an integer, the number of iterations for each simulation. default is 100
            seed, an integer, the random seed that you will set for the whole simulation experiment. default is 389
            correct_the_pvalues, a boolean, whether or not to perform multiple hypothesis testing correction
     Output: power, a float, the power of the experiment
     '''
-
     numpy.random.seed(seed)
-    pvals = []
 
     # bunch of tosses and probs
     tosses = numpy.array([10, 50, 100, 250, 500, 1000])
     probs = numpy.around(numpy.arange(0.55, 1.05, 0.05), decimals=2)[::-1]
 
-    for prob_heads in probs:
-        for n_toss in tosses:
+    powers = numpy.zeros((len(probs), len(tosses)))
+
+    for i, prob_heads in enumerate(probs):
+        for j, n_toss in enumerate(tosses):
+            # for each condition
+            pvals = []
             for k in range(n_iters):
                 # do experiment of n_toss coin tosses, n_iters times
                 results_arr = simulate_coin_toss(n_toss, prob_heads = prob_heads)
                 n_success = numpy.sum(results_arr)
+                # calculate pval for each iteration
                 pvals.append(perform_hypothesis_test(n_success, n_toss))
             if correct_the_pvalues:
+                # now have list of pvals, correct them if you want
                 pvals = correct_pvalues(pvals)
 
-    pvals_translated_to_bools = interpret_pvalues(pvals)
-    power = compute_power(numpy.sum(pvals_translated_to_bools), n_iters)
-    return(power)
+            # translate pvals to bool
+            pvals_translated_to_bools = interpret_pvalues(pvals)
+            powers[i][j] = compute_power(numpy.sum(pvals_translated_to_bools), n_iters)
+
+    return(powers)
 
 
-power1 = run_experiment(0.6, 500, correct_the_pvalues = True)
-power2 = run_experiment(0.95, 10, correct_the_pvalues = True)
-power2b = run_experiment(0.95, 10)
+power1 = run_experiment(correct_the_pvalues = True)
+power2 = run_experiment(correct_the_pvalues = True)
+power2b = run_experiment()
