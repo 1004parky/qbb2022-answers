@@ -81,6 +81,7 @@ def run_experiment(n_iters = 100, seed = 389, correct_the_pvalues = False):
     probs = numpy.around(numpy.arange(0.55, 1.05, 0.05), decimals=2)[::-1]
 
     powers = numpy.zeros((len(probs), len(tosses)))
+    powers_corrected = numpy.zeros((len(probs), len(tosses)))
 
     for i, prob_heads in enumerate(probs):
         for j, n_toss in enumerate(tosses):
@@ -92,17 +93,31 @@ def run_experiment(n_iters = 100, seed = 389, correct_the_pvalues = False):
                 n_success = numpy.sum(results_arr)
                 # calculate pval for each iteration
                 pvals.append(perform_hypothesis_test(n_success, n_toss))
-            if correct_the_pvalues:
-                # now have list of pvals, correct them if you want
-                pvals = correct_pvalues(pvals)
+
+            pvals_corrected = correct_pvalues(pvals)
 
             # translate pvals to bool
             pvals_translated_to_bools = interpret_pvalues(pvals)
             powers[i][j] = compute_power(numpy.sum(pvals_translated_to_bools), n_iters)
+            
+            pvals_translated_to_bools = interpret_pvalues(pvals_corrected)
+            powers_corrected[i][j] = compute_power(numpy.sum(pvals_translated_to_bools), n_iters)
 
-    return(powers)
+    # plot with and without correction 
+    fig, ax = plt.subplots(ncols=2)
+    sns.heatmap(powers, ax=ax[0], vmin=0, vmax=1, cmap='viridis', xticklabels=tosses, yticklabels=probs, linewidths=0.1)
+    sns.heatmap(powers_corrected, ax=ax[1], vmin=0, vmax=1, cmap='viridis', xticklabels=tosses, yticklabels=probs, linewidths=0.1)
+    
+    for i in range(len(ax)):
+        ax[i].set_ylabel('P(heads)')
+        ax[i].set_xlabel('number of coin tosses')
 
+    ax[0].set_title('With correction')
+    ax[1].set_title('Without correction')
 
-power1 = run_experiment(correct_the_pvalues = True)
-power2 = run_experiment(correct_the_pvalues = True)
-power2b = run_experiment()
+    fig.suptitle('Power of coin toss simulations')
+    plt.tight_layout()
+    fig.savefig('power_c.png')
+    return powers, powers_corrected
+
+run_experiment()
