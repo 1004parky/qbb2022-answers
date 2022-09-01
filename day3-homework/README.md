@@ -50,3 +50,6 @@ ImportError: dlopen(/Users/cmdb/miniconda3/lib/python3.9/site-packages/numpy/cor
 The last part said they couldn't find any openblas things so that is why I chose to `conda install openblas`.
 
 To fix this other error, `Unable to revert mtime: /Library/Fonts`, I ran `conda install libmagic`
+
+## Exercise 3
+Wow, superpopulation is super clearly clustered.
