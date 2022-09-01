@@ -19,4 +19,9 @@ I don't know if this is the intention, but the gtf file is really hard to read t
 We had looked at exons, protein coding, and processed pseudogene. There were also miRNA, lncRNA, and transcribed unprocessed pseudogene. I know miRNA is important in regulation, too; for long non-coding RNA, I'm not as sure of the functional role, but the fact that the gene is being transcribed, at least, sounds important. Same for the last category, I'm not sure what a pseudogene is, but the fact that it is transcribed indicates that thy may have some implications in disease or physiology.
 
 ## Exercise 2
+Ideally, I would put most of what is in the bash script in python so that I could find a global ymin and ymax I should use for the histograms. I could theoretically have python print these values, and then use bash variables to keep track... but I would have to know this before plotting so never mind. Anyway, for this one, I used visual inspection to decide what the y axes should be. I did use a log scale, too.
 
+As for trends, everything is skewed right. But for example for exons, there are much fewer, very high allele counts. Same for the processed pseudogene. I think these outlier groups would be interesting to investigate futher.
+
+
+ 
