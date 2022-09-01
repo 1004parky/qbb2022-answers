@@ -21,7 +21,6 @@ ax.set_ylabel('Frequency')
 ax.set_xlabel('Allele count')
 ax.set_ylim((4e-6,3e-3)) # after manual inspection of data
 fig.tight_layout()
-plt.show()
 fig.savefig( vcf + ".png" )
 
 fs.close()
