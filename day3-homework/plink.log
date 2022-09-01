@@ -1,13 +1,13 @@
 PLINK v1.90b6.21 64-bit (19 Oct 2020)
 Options in effect:
-  --pca
+  --pca 3
   --vcf ALL.chr21.shapeit2_integrated_v1a.GRCh38.20181129.phased.vcf.gz
 
 Hostname: bootcamp-64.win.ad.jhu.edu
 Working directory: /Users/cmdb/qbb2022-answers/day3-homework
-Start time: Wed Aug 31 09:13:24 2022
+Start time: Wed Aug 31 18:12:28 2022
 
-Random number seed: 1661951604
+Random number seed: 1661983948
 16384 MB RAM detected; reserving 8192 MB for main workspace.
 --vcf: plink-temporary.bed + plink-temporary.bim + plink-temporary.fam written.
 976599 variants loaded from .bim file.
@@ -21,4 +21,4 @@ Note: No phenotypes present.
 Relationship matrix calculation complete.
 --pca: Results saved to plink.eigenval and plink.eigenvec .
 
-End time: Wed Aug 31 09:17:03 2022
+End time: Wed Aug 31 18:16:09 2022
