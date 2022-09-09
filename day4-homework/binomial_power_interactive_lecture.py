@@ -110,8 +110,8 @@ def run_experiment(tosses, probs, n_iters = 100, seed = 389, correct_the_pvalues
         ax[i].set_ylabel('P(heads)')
         ax[i].set_xlabel('number of coin tosses')
 
-    ax[0].set_title('With correction')
-    ax[1].set_title('Without correction')
+    ax[0].set_title('Without correction')
+    ax[1].set_title('With correction')
 
     fig.suptitle('Power of coin toss simulations')
     plt.tight_layout()

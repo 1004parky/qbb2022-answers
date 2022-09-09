@@ -5,6 +5,9 @@ The `probs` line:
 - Take a list of numbers going from 0.55 to 1.00 (inclusive) incrementing by 0.05. Then round tall numbers in this array to two decimal places.. (I'm not sure why the around is needed because doesn't arange already return in 0.05 increments?). Then, the list slicing reverses the array.
 Note, the `prob_heads` and `n_toss` args are now obsolete so got rid of them.
 
+## C
+Power increases as you increase the number of coin tosses or as you increase the probability of heads. However, the number of tosses has a stronger effect on the power.
+
 ## D
 The biological phenomenon of interest is transmission distortion, where some alleles are disproportionately passed down to the next generation (rather than an equal proportion). In the study they were analyzing this phenomenon on a new sperm dataset.
 
