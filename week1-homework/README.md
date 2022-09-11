@@ -14,7 +14,7 @@
 
 ## Question 3
 1. Average identity is `99.98`. After downgrading with `conda install mummer=3.23=h6de7cb9_11`. I ran `dnadiff ref.fa asm_q2/scaffolds.fasta` and looked in `out.report` and found the Average Identity. 
-2. Next is `nucmer ref.fa asm_q2/scaffolds.fasta`. I looked in `out.fasta` using `show-coords out.delta`, and got `207007` as the length of the longest read.
+2. Next is `nucmer ref.fa asm_q2/scaffolds.fasta`. I looked in `out.fasta` using `show-coords out.delta`, and got `207000` as the length of the longest read in our assembly, and `207007` in the reference.
 3. For Insertions, we get 1 insertion. 15 deletions (Indel)
 
 ## Question 4 
