@@ -18,6 +18,9 @@
 3. For Insertions, we get 1 insertion. 15 deletions (Indel)
 
 ## Question 4 
-1. 
-
+1. Using `show-coords out.delta` I see that the alignment for my assembly is separated by a large region, from position 26788 to 27497. So the start position of the insertion in my assembly is 26788. The corresponding position in my reference is 26789/26788. 
+2. The length of the novel insertion is `27497-26788+1 = 710` (I add one because we need to include the last one). 
+3. The DNA sequence of the encoded message is in `asm/insertion.fasta`. I extracted using `samtools faidx asm_q2/scaffolds.fasta NODE_1_length_234497_cov_20.506978:26788-27497 > insertion.fasta`. The string `NODE_1_length_234497_cov_20.506978` is the name of the sequence from the scaffold fasta file. 
+4. I used the help string from the python script. `python dna-decode.py -d --input insertion.fasta`. I get the secret message, `Congratulations to the 2022 CMDB @ JHU class!  Keep on looking for little green aliens..`
+ 
 
