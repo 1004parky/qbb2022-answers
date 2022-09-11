@@ -12,3 +12,12 @@
 3. The size of my largest contig was 105830 nucleotides.
 4. The contig N50 size is defined as the size of the contig that covers at least half of the total genome length. Based on the SPAdes output, the half length of the genome is $234467/2=117233.5$, so I want the contig covering the 117234th position. This is the 2nd contig, with length 47860.
 
+## Question 3
+1. Average identity is `99.98`. After downgrading with `conda install mummer=3.23=h6de7cb9_11`. I ran `dnadiff ref.fa asm_q2/scaffolds.fasta` and looked in `out.report` and found the Average Identity. 
+2. Next is `nucmer ref.fa asm_q2/scaffolds.fasta`. I looked in `out.fasta` using `show-coords out.delta`, and got `207007` as the length of the longest read.
+3. For Insertions, we get 1 insertion. 15 deletions (Indel)
+
+## Question 4 
+1. 
+
+

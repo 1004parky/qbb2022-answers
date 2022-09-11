@@ -1,0 +1,122 @@
+- STAGE: Before start
+  args: []
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: 'true'
+  short_name: before_start
+- STAGE: Read error correction
+  args: []
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: 'true'
+  short_name: ec_start
+- STAGE: Read error correction
+  args:
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/corrected/configs/config.info
+  config_dir: corrected
+  del_after:
+  - tmp/hammer_p8etj88d
+  output_files:
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/corrected/corrected.yaml
+  path: /Users/cmdb/Downloads/SPAdes-3.15.5-Darwin/bin/spades-hammer
+  short_name: ec_runtool
+- STAGE: corrected reads compression
+  args:
+  - /Users/cmdb/Downloads/SPAdes-3.15.5-Darwin/share/spades/spades_pipeline/scripts/compress_all.py
+  - --input_file
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/corrected/corrected.yaml
+  - --ext_python_modules_home
+  - /Users/cmdb/Downloads/SPAdes-3.15.5-Darwin/share/spades
+  - --max_threads
+  - '4'
+  - --output_dir
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/corrected
+  - --gzip_output
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: /Users/cmdb/miniconda3/bin/python
+  short_name: ec_compress
+- STAGE: Read error correction
+  args: []
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: 'true'
+  short_name: ec_finish
+- STAGE: Assembling
+  args: []
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: 'true'
+  short_name: as_start
+- STAGE: K31
+  args:
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/K31/configs/config.info
+  config_dir: K31
+  del_after: []
+  output_files: []
+  path: /Users/cmdb/Downloads/SPAdes-3.15.5-Darwin/bin/spades-core
+  short_name: k31
+- STAGE: Copy files
+  args:
+  - /Users/cmdb/Downloads/SPAdes-3.15.5-Darwin/share/spades/spades_pipeline/scripts/copy_files.py
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/K31/before_rr.fasta
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/before_rr.fasta
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/K31/assembly_graph_after_simplification.gfa
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/assembly_graph_after_simplification.gfa
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/K31/final_contigs.fasta
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/contigs.fasta
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/K31/first_pe_contigs.fasta
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/first_pe_contigs.fasta
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/K31/strain_graph.gfa
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/strain_graph.gfa
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/K31/scaffolds.fasta
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/scaffolds.fasta
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/K31/scaffolds.paths
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/scaffolds.paths
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/K31/assembly_graph_with_scaffolds.gfa
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/assembly_graph_with_scaffolds.gfa
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/K31/assembly_graph.fastg
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/assembly_graph.fastg
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/K31/final_contigs.paths
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/contigs.paths
+  config_dir: ''
+  del_after:
+  - .bin_reads
+  - tmp/spades_8si1ioup
+  output_files: []
+  path: /Users/cmdb/miniconda3/bin/python
+  short_name: copy_files
+- STAGE: Assembling
+  args: []
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: 'true'
+  short_name: as_finish
+- STAGE: Breaking scaffolds
+  args:
+  - /Users/cmdb/Downloads/SPAdes-3.15.5-Darwin/share/spades/spades_pipeline/scripts/breaking_scaffolds_script.py
+  - --result_scaffolds_filename
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/scaffolds.fasta
+  - --misc_dir
+  - /Users/cmdb/qbb2022-answers/week1-homework/asm/asm_q2/misc
+  - --threshold_for_breaking_scaffolds
+  - '3'
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: /Users/cmdb/miniconda3/bin/python
+  short_name: bs
+- STAGE: Terminate
+  args: []
+  config_dir: ''
+  del_after:
+  - configs
+  output_files: []
+  path: 'true'
+  short_name: terminate
