@@ -42,4 +42,6 @@
 *.out 
 *.csv 
 *.tgz
-
+*.fastg
+*.gfa
+*.info
