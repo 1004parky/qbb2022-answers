@@ -90,7 +90,7 @@ if __name__ == '__main__':
 				# Went with d
 				traceback[i, j] = letter2code['D']
 			elif h == score:
-				# Went with h, have gap in seq 2
+				# Went with h, have gap in seq 1
 				traceback[i, j] = letter2code['L']
 			else:
 				traceback[i, j] = letter2code['U']
