@@ -33,8 +33,9 @@ def parse_anns(anns):
 		fields = a.split('|')
 		# If it ever equals A T C or G, need to count the next one 
 		for i in range(len(fields)):
-			if fields[i] in 'ATCG'.split():
-				types.append(fields[i+1])
+			if fields[i] in 'A T C G'.split():
+				if fields[i+1] == '': continue
+				types += fields[i+1].split('&')
 	return types
 
 # Parse vcf file
@@ -73,10 +74,13 @@ axs[1,0].set_xlabel('Allele frequency')
 anns = parse_anns(parse_vcf(vcf, 7, 'ANN')) # get one of them 
 effects = list(set(anns))
 freq = [anns.count(e) for e in effects]
-axs[1,1].barh(np.arange(len(effects)), freq, tick_label=effects)
+print(effects)
+axs[1,1].barh(np.arange(len(effects)), freq)
 axs[1,1].set_title('Predicted effects')
 axs[1,1].set_xlabel('Counts')
 axs[1,1].set_ylabel('Effect type')
+axs[1,1].set_yticks(np.arange(len(effects)))
+axs[1,1].set_yticklabels(effects, fontdict={'fontsize':5})
 
 plt.tight_layout()
 plt.savefig('hw3.8.png')
