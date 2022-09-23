@@ -1,4 +1,5 @@
 *.bam
+*.bam.bai
 *.bcf
 *.bed
 *.bg
@@ -45,3 +46,4 @@
 *.fastg
 *.gfa
 *.info
+sacCer3.*
