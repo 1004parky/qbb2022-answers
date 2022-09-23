@@ -16,7 +16,8 @@ def count_gaps(seq):
 			# new gap
 			if gaps[-1] != 0:
 				gaps.append(0)
-	return np.max(gaps)
+	gaps = [g for g in gaps if g != 0]
+	return np.max(gaps), len(gaps)
 
 # Print out number of gaps in first sequence, in 2nd, and score of final align
 
@@ -145,8 +146,13 @@ if __name__ == '__main__':
 
 	print('Number of gaps in align 1: {}'.format(align1.count('-')))
 	print('Number of gaps in align 2: {}'.format(align2.count('-')))
-	print('Length of largest gap in align 1: {}'.format(count_gaps(align1)))
-	print('Length of largest gap in align 2: {}'.format(count_gaps(align2)))
+
+	print('Length of largest gap in align 1: {}'.format(count_gaps(align1)[0]))
+	print('Length of largest gap in align 2: {}'.format(count_gaps(align2)[0]))
+
+	print('Number of gaps (consecutive counted as 1 gap) in align 1: {}'.format(count_gaps(align1)[1]))
+	print('Number of gaps (consecutive counted as 1 gap) in align 2: {}'.format(count_gaps(align2)[1]))
+
 	print('Score of the alignment: {}'.format(F_matrix[-1,-1]))
 
 	# Save 
