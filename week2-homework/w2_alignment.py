@@ -6,6 +6,18 @@ from fasta import readFASTA
 import numpy as np 
 import sys
 
+def count_gaps(seq):
+	# Find length of longest gap
+	gaps = [0]
+	for i in seq:
+		if i == '-':
+			gaps[-1] += 1 
+		else:
+			# new gap
+			if gaps[-1] != 0:
+				gaps.append(0)
+	return np.max(gaps)
+
 # Print out number of gaps in first sequence, in 2nd, and score of final align
 
 # Run 2x, once for DNA, once for protein
@@ -133,6 +145,8 @@ if __name__ == '__main__':
 
 	print('Number of gaps in align 1: {}'.format(align1.count('-')))
 	print('Number of gaps in align 2: {}'.format(align2.count('-')))
+	print('Length of largest gap in align 1: {}'.format(count_gaps(align1)))
+	print('Length of largest gap in align 2: {}'.format(count_gaps(align2)))
 	print('Score of the alignment: {}'.format(F_matrix[-1,-1]))
 
 	# Save 
