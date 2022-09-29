@@ -3,19 +3,19 @@
 # Step 1
 #bwa index sacCer3.fa
 
-#for file in ./A01_*.fastq; do 
-#  if [ -e "$file" ] ; then   # Check whether file exists.
-#		name=${file%.*}
-#		name=${name#./}
-#		echo ${name}
-#		# Step 2
-#		bwa mem -R "@RG\tID:${name}\tSM:${name}" -t 4 sacCer3.fa ${file} > aln-${name}.sam
-#		# Step 3a
-#		samtools sort -@4 -o ${name}.bam aln-${name}.sam
-#		# Step 3b
-#		samtools index ${name}.bam > ${name}.bam.bai
-#  fi
-#done
+for file in ./A01_*.fastq; do 
+ if [ -e "$file" ] ; then   # Check whether file exists.
+		name=${file%.*}
+		name=${name#./}
+		echo ${name}
+		# Step 2
+		bwa mem -R "@RG\tID:${name}\tSM:${name}" -t 4 sacCer3.fa ${file} > aln-${name}.sam
+		# Step 3a
+		samtools sort -@4 -o ${name}.bam aln-${name}.sam
+		# Step 3b
+		samtools index ${name}.bam > ${name}.bam.bai
+ fi
+done
 
 bams=""
 for file in ./*.bam; do 
