@@ -1,3 +1,6 @@
+*.r
+*.xls
+*.narrowPeak
 *.bdg
 plink.*
 *_IC50.txt
