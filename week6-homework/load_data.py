@@ -85,7 +85,7 @@ if __name__ == "__main__":
 
     axs[0].imshow(-1*dd_mat, cmap='magma', vmin=-vmax, vmax=0)
     axs[1].imshow(-1*d_mat, cmap='magma', vmin=-vmax, vmax=0)
-    axs[2].imshow((remove_dd_bg(smooth_matrix(d_mat))-remove_dd_bg(smooth_matrix(dd_mat))), cmap='seismic', norm=colors.CenteredNorm())
+    axs[2].imshow((smooth_matrix(remove_dd_bg(d_mat))-smooth_matrix(remove_dd_bg(dd_mat))), cmap='seismic', norm=colors.CenteredNorm())
     
     axs[0].axis('off')
     axs[1].axis('off')
@@ -118,7 +118,7 @@ if __name__ == "__main__":
 
     axs[0].imshow(-1*dd_mat, cmap='magma', vmin=-vmax, vmax=0)
     axs[1].imshow(-1*d_mat, cmap='magma', vmin=-vmax, vmax=0)
-    axs[2].imshow((remove_dd_bg(smooth_matrix(d_mat))-remove_dd_bg(smooth_matrix(dd_mat))), cmap='seismic', norm=colors.CenteredNorm())
+    axs[2].imshow((smooth_matrix(remove_dd_bg(d_mat))-smooth_matrix(remove_dd_bg(dd_mat))), cmap='seismic', norm=colors.CenteredNorm())
     axs[0].set_title('ddCTCF')
     axs[1].set_title('dCTCF')
     axs[2].set_title('dCTCF - ddCTCF')
