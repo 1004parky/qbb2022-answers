@@ -5,6 +5,7 @@ import sys
 import numpy as np 
 import matplotlib.pyplot as plt
 import matplotlib.colors as colors
+from scipy import ndimage
 
 # analysis/hic_results/matrix/ddCTCF/iced/6400/ddCTCF_ontarget_6400_iced.matrix
 # analysis/hic_results/matrix/ddCTCF/iced/6400/dCTCF_ontarget_6400_iced.matrix
@@ -65,36 +66,40 @@ def smooth_matrix(mat):
 
 
 if __name__ == "__main__":
-    # dd_matrix = 'analysis/hic_results/matrix/ddCTCF/iced/6400/ddCTCF_ontarget_6400_iced.matrix'
-    # d_matrix = 'analysis/hic_results/matrix/dCTCF/iced/6400/dCTCF_ontarget_6400_iced.matrix'
-    # bin_fname = 'analysis/hic_results/matrix/dCTCF/raw/6400/dCTCF_ontarget_6400_abs.bed'
+    dd_matrix = 'analysis/hic_results/matrix/ddCTCF/iced/6400/ddCTCF_ontarget_6400_iced.matrix'
+    d_matrix = 'analysis/hic_results/matrix/dCTCF/iced/6400/dCTCF_ontarget_6400_iced.matrix'
+    bin_fname = 'analysis/hic_results/matrix/dCTCF/raw/6400/dCTCF_ontarget_6400_abs.bed'
 
-    # start, end = get_bins(bin_fname, b'chr15', 11170245, 12070245)
+    start, end = get_bins(bin_fname, b'chr15', 11170245, 12070245)
 
-    # dim = end - start
+    dim = end - start
 
-    # dd_data = process_data(dd_matrix, start, end)
-    # d_data = process_data(d_matrix, start, end)
+    dd_data = process_data(dd_matrix, start, end)
+    d_data = process_data(d_matrix, start, end)
 
-    # dd_mat = populate_matrix(dd_data, dim)
-    # d_mat = populate_matrix(d_data, dim)
+    dd_mat = populate_matrix(dd_data, dim)
+    d_mat = populate_matrix(d_data, dim)
 
-    # fig, axs = plt.subplots(1,3)
+    fig, axs = plt.subplots(1,3)
 
-    # vmax = np.max([np.max(dd_mat), np.max(d_mat)])
+    vmax = np.max([np.max(dd_mat), np.max(d_mat)])
 
-    # axs[0].imshow(-1*dd_mat, cmap='magma', vmin=-vmax, vmax=0)
-    # axs[1].imshow(-1*d_mat, cmap='magma', vmin=-vmax, vmax=0)
-    # axs[2].imshow((remove_dd_bg(smooth_matrix(dd_mat))-remove_dd_bg(smooth_matrix(d_mat))), cmap='seismic', norm=colors.CenteredNorm())
+    axs[0].imshow(-1*dd_mat, cmap='magma', vmin=-vmax, vmax=0)
+    axs[1].imshow(-1*d_mat, cmap='magma', vmin=-vmax, vmax=0)
+    axs[2].imshow((remove_dd_bg(smooth_matrix(dd_mat))-remove_dd_bg(smooth_matrix(d_mat))), cmap='seismic', norm=colors.CenteredNorm())
     
-    # axs[0].set_title('ddCTCF')
-    # axs[1].set_title('dCTCF')
-    # axs[2].set_title('difference map')
+    axs[0].axis('off')
+    axs[1].axis('off')
+    axs[2].axis('off')
 
-    # plt.suptitle('HiC plot for chr15:11170245-12070245')
-    # plt.tight_layout()
-    # plt.savefig('hiC.png')
-    # plt.show()
+    axs[0].set_title('ddCTCF')
+    axs[1].set_title('dCTCF')
+    axs[2].set_title('difference map')
+
+    plt.suptitle('HiC plot for chr15:11170245-12070245')
+    plt.tight_layout()
+    plt.savefig('hiC.png')
+    plt.show()
 
     ### FULL DATA SETS ###
     dd_full = 'matrix/ddCTCF_full.6400.matrix'
@@ -122,6 +127,10 @@ if __name__ == "__main__":
     axs[1].set_title('dCTCF')
     axs[2].set_title('difference map')
 
+    axs[0].axis('off')
+    axs[1].axis('off')
+    axs[2].axis('off')
+
     plt.suptitle('HiC plot for chr15:10400000-13400000')
     plt.tight_layout()
     plt.savefig('hiC_full.png')
@@ -130,25 +139,50 @@ if __name__ == "__main__":
     # Now insulation scores
     dd_insul = []
     d_insul = []
-    for i in range(dd_mat.shape[0]):
+    for i in range(dd_mat.shape[0]-10):
         dd_insul.append(np.mean(dd_mat[(i - 5):(i+5), (i-5):(i + 5)]))
     
-    for i in range(d_mat.shape[0]):
+    for i in range(d_mat.shape[0]-10):
         d_insul.append(np.mean(d_mat[(i - 5):(i+5), (i-5):(i + 5)]))
 
-    print(len(d_insul))
-    print(len(dd_insul))
-
-    fig, ax = plt.subplots(2, 1, gridspec_kw={'height_ratios': [3, 1]}, figsize=(5,6.25))
-    ax[0].axis('off')
+    assert(np.sum(np.array(dd_insul) != np.array(d_insul)) > 0)
+    print(d_insul)
+    fig, ax = plt.subplots(2, 2, gridspec_kw={'height_ratios': [3, 1]}, figsize=(10,6.25))
+    ax[0,0].axis('off')
+    rot = ndimage.rotate(d_mat, 45)
+    ax[0,0].imshow(-1*rot[:int(len(rot)/2)], cmap='magma', vmin=-vmax, vmax=0)
+    ax[1,0].plot(np.arange(len(d_insul)), d_insul)
     plt.margins(x=0)
-    ax[1].set_xlim(10400000, 13400000)
+    ax[1,0].set_xticks([0, len(d_insul)-1])
+    ax[1,0].set_xticklabels([10400000, 13400000])
+
+    ax[0,1].axis('off')
+    rot = ndimage.rotate(dd_mat, 45)
+    ax[0,1].imshow(-1*rot[:int(len(rot)/2)], cmap='magma', vmin=-vmax, vmax=0)
+    ax[1,1].plot(np.arange(len(dd_insul)), dd_insul)
+    plt.margins(x=0)
+    ax[1,1].set_xticks([0, len(dd_insul)-1])
+    ax[1,1].set_xticklabels([10400000, 13400000])
+
+    ax[0,0].set_title('dCTCF')
+    ax[0,1].set_title('ddCTCF')
+
+    ax[1,0].set_ylabel('Insulation score')
+    ax[1,1].set_ylabel('Insulation score')
+
+    ax[1,0].set_xlabel('Position')
+    ax[1,1].set_xlabel('Position')
+
     plt.subplots_adjust(left=0.15,
                     bottom=0.1,
                     right=1.0,
                     top=1.0,
                     wspace=0.4,
                     hspace=0.0)
+    plt.tight_layout()
+    plt.suptitle('HiC and insulation scores')
+    plt.savefig('hic_insulation.png')
+    plt.show()
 
 
     
