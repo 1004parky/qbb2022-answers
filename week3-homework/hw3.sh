@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Step 1
-#bwa index sacCer3.fa
+bwa index sacCer3.fa
 
 for file in ./A01_*.fastq; do 
  if [ -e "$file" ] ; then   # Check whether file exists.
@@ -23,7 +23,7 @@ for file in ./*.bam; do
 done
 echo $bams
 # Step 4 + 5
-freebayes -f sacCer3.fa --genotype-qualities ${bams} | vcffilter -f "QUAL > 20" > yeast_filtered.vcf
+freebayes -f sacCer3.fa --genotype-qualities ${bams} -p 1 | vcffilter -f "QUAL > 20" > yeast_filtered.vcf
 
 vcfallelicprimitives -k -g yeast_filtered.vcf > yeast_ap.vcf
 
