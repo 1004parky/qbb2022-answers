@@ -1,6 +1,6 @@
 # Week 3 Variant Calling -- Feedback
 
-1 + 1 + 1 + 0.75 + 1 + 1 + 1 + 1 + 1 + 0 = 8.75 points out of 10 possible points
+1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 = 10 points out of 10 possible points
 
 1. Index genome
 
@@ -17,8 +17,9 @@
 
 4. variant call with freebayes
 
-  * should include the `-p 1` flag since the yeast ploidy is 1.
-  * --> +0.75
+  ~* should include the `-p 1` flag since the yeast ploidy is 1.~
+  ~* --> +0.75~
+  * *good --> +1*
 
 5. filter variants
 
@@ -42,4 +43,5 @@
 
 10. 1000 line vcf
 
-  * I don't see the vcf file. Did you do `git add --force <your.vcf>`?
+  ~* I don't see the vcf file. Did you do `git add --force <your.vcf>`?~
+  * *--> +1*
