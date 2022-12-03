@@ -50,37 +50,37 @@ def run_fixation(n_runs, af, n_pop):
 		fixation.append(len(af_dict['af']))
 	return fixation
 
-plot_af(wright_fisher(0.5, 10), save='af_1.1.png')
-plot_af(wright_fisher(0.8, 10), save='af_1.2.png')
+# plot_af(wright_fisher(0.5, 10), save='af_1.1.png')
+# plot_af(wright_fisher(0.8, 10), save='af_1.2.png')
 
-# Step 3
-# Histogram for 1000 runs
-af = 0.5
-n_runs = 1000
-n_pop = 100
-plt.hist(run_fixation(n_runs, af, n_pop))
-plt.title(f'Histogram of fixation time for {n_runs} runs\nStart AF: {af}, population size: {n_pop}')
-plt.xlabel('Fixation time (for any allele) (generations)')
-plt.ylabel('Counts')
-plt.savefig('hist_3.png')
-plt.show()
+# # Step 3
+# # Histogram for 1000 runs
+# af = 0.5
+# n_runs = 1000
+# n_pop = 100
+# plt.hist(run_fixation(n_runs, af, n_pop))
+# plt.title(f'Histogram of fixation time for {n_runs} runs\nStart AF: {af}, population size: {n_pop}')
+# plt.xlabel('Fixation time (for any allele) (generations)')
+# plt.ylabel('Counts')
+# plt.savefig('hist_3.png')
+# plt.show()
 
-# Step 4
-# Vary pop size
-af = 0.5
-n_runs = 1 # per condition
-for i in range(2, 8): 
-	# Will give me n_pop from 100 to 10 million 
-	n_pop = 10**i
-	fixation = run_fixation(n_runs, af, n_pop)
-	plt.plot(n_pop, fixation[0], '.r')
-plt.title(f'Fixation time (for any allele) vs population size\nStart AF: {af}')
-plt.ylabel('Fixation time (for any allele) (generations)')
-plt.xlabel('Population sizes')
-plt.xscale('log')
-plt.yscale('log')
-plt.savefig('fixation_v_size_4.png')
-plt.show()
+# # Step 4
+# # Vary pop size
+# af = 0.5
+# n_runs = 1 # per condition
+# for i in range(2, 8): 
+# 	# Will give me n_pop from 100 to 10 million 
+# 	n_pop = 10**i
+# 	fixation = run_fixation(n_runs, af, n_pop)
+# 	plt.plot(n_pop, fixation[0], '.r')
+# plt.title(f'Fixation time (for any allele) vs population size\nStart AF: {af}')
+# plt.ylabel('Fixation time (for any allele) (generations)')
+# plt.xlabel('Population sizes')
+# plt.xscale('log')
+# plt.yscale('log')
+# plt.savefig('fixation_v_size_4.png')
+# plt.show()
 
 # Step 5
 # vary AF
@@ -96,4 +96,5 @@ plt.xticks(ticks=np.arange(12), labels=['']+labels)
 plt.xlabel('Allele frequency')
 plt.ylabel('Fixation time')
 plt.yscale('log')
+plt.savefig('fixation_v_af_5.png')
 plt.show()
